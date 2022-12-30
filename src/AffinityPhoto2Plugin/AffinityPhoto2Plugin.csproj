@@ -86,6 +86,8 @@
     <EmbeddedResource Include="Actions\SelectSelectionTool3.png" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Actions\SelectBlemishRemovalTool0.png" />
+    <EmbeddedResource Include="Actions\SelectBlemishRemovalTool1.png" />
     <Content Include="metadata\Icon16x16.png" />
     <Content Include="metadata\Icon256x256.png" />
     <Content Include="metadata\Icon32x32.png" />
