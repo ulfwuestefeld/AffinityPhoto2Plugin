@@ -50,7 +50,7 @@ pluginCapabilities:
     #- HasApplication
 
     # Uncomment the following line if the plugin sends keyboard shortcuts to the target application.
-    #- ActivatesApplication
+    - ActivatesApplication
 
 
 # ==================================================================================================
