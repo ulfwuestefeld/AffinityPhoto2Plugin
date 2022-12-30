@@ -12,8 +12,7 @@ namespace Loupedeck.AffinityPhoto2Plugin
         private readonly String _image0ResourcePath;
         private readonly String _image1ResourcePath;
 
-        public AdjustZoom()
-            : base(displayName: "Zoom", description: "Dial Zooms in or out, click resets zoom to fit.", groupName: "Tools Panel", hasReset: true)
+        public AdjustZoom() : base(displayName: "Zoom", description: "Dial Zooms in or out, click resets zoom to fit.", groupName: "Tools Panel", hasReset: true)
         {
             this._image0ResourcePath = EmbeddedResources.FindFile("AdjustZoom0.png");
             this._image1ResourcePath = EmbeddedResources.FindFile("AdjustZoom1.png");
@@ -26,14 +25,15 @@ namespace Loupedeck.AffinityPhoto2Plugin
             {
                 for (Int32 i = 0; i > diff; i--)
                 {
-                    this.Plugin.ClientApplication.SendKeyboardShortcut(VirtualKeyCode.Minus, ModifierKey.Command);
+                    //this.Plugin.ClientApplication.
+                    this.Plugin.ClientApplication.SendKeyboardShortcut(VirtualKeyCode.Minus, ModifierKey.Control);
                 }
             }
             if (diff > 0)
             {
                 for (Int32 i = 0; i < diff; i++)
                 {
-                    this.Plugin.ClientApplication.SendKeyboardShortcut(VirtualKeyCode.Minus, ModifierKey.Command);
+                    this.Plugin.ClientApplication.SendKeyboardShortcut(VirtualKeyCode.Add, ModifierKey.Control);
                 }
             }
             this.AdjustmentValueChanged();
@@ -48,7 +48,7 @@ namespace Loupedeck.AffinityPhoto2Plugin
         protected override void RunCommand(String actionParameter)
         {
             this._counter = 0;
-            this.Plugin.ClientApplication.SendKeyboardShortcut(VirtualKeyCode.Key0,ModifierKey.Command);
+            this.Plugin.ClientApplication.SendKeyboardShortcut(VirtualKeyCode.Key0,ModifierKey.Control);
             this._toggleState = !this._toggleState;
             this.ActionImageChanged();
             this.AdjustmentValueChanged();

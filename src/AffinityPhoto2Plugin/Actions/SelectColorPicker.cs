@@ -2,17 +2,17 @@
 {
     using System;
 
-    public class SelectPaintbrush : PluginDynamicCommand
+    public class SelectColorPicker : PluginDynamicCommand
     {
         private Boolean _toggleState = false;
 
         private readonly String _image0ResourcePath;
         private readonly String _image1ResourcePath;
 
-        public SelectPaintbrush() : base(displayName: "Paintbrush", description: "Selects the paint brush.", groupName: "Tools Panel")
+        public SelectColorPicker() : base(displayName: "Colorpicker", description: "Selects the color picker tool.", groupName: "Tools Panel")
         {
-            this._image0ResourcePath = EmbeddedResources.FindFile("SelectPaintbrush0.png");
-            this._image1ResourcePath = EmbeddedResources.FindFile("SelectPaintbrush1.png");
+            this._image0ResourcePath = EmbeddedResources.FindFile("SelectColorPicker0.png");
+            this._image1ResourcePath = EmbeddedResources.FindFile("SelectColorPicker1.png");
         }
         protected override BitmapImage GetCommandImage(String actionParameter, PluginImageSize imageSize)
         {
@@ -22,13 +22,13 @@
         }
         protected override void RunCommand(String actionParameter)
         {
-            if(!this._toggleState)
+            if (!this._toggleState)
             {
                 this.Plugin.ClientApplication.SendKeyboardShortcut(VirtualKeyCode.KeyH);
             }
             else
             {
-                this.Plugin.ClientApplication.SendKeyboardShortcut(VirtualKeyCode.KeyB);
+                this.Plugin.ClientApplication.SendKeyboardShortcut(VirtualKeyCode.KeyI);
             }
             this._toggleState = !this._toggleState;
             this.ActionImageChanged();
