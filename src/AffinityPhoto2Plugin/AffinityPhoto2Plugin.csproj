@@ -56,6 +56,7 @@
     <Compile Include="Actions\SelectColorPicker.cs" />
     <Compile Include="Actions\SelectBlemishRemovalTool.cs" />
     <Compile Include="Actions\SelectEraser.cs" />
+    <Compile Include="Actions\SelectDodgeBurn.cs" />
     <Compile Include="Actions\SelectSelectionTool.cs" />
     <Compile Include="Actions\SelectPaintbrush.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -94,6 +95,8 @@
     <EmbeddedResource Include="Actions\SelectEraser1.png" />
     <EmbeddedResource Include="Actions\AdjustBrushSize0.png" />
     <EmbeddedResource Include="Actions\AdjustBrushSize1.png" />
+    <EmbeddedResource Include="Actions\SelectDodgeBurn0.png" />
+    <EmbeddedResource Include="Actions\SelectDodgeBurn1.png" />
     <Content Include="metadata\Icon16x16.png" />
     <Content Include="metadata\Icon256x256.png" />
     <Content Include="metadata\Icon32x32.png" />
