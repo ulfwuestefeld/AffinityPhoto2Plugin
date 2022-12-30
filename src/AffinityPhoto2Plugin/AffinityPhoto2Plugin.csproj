@@ -56,7 +56,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AffinityPhoto2Application.cs" />
     <Compile Include="AffinityPhoto2Plugin.cs" />
-    <Compile Include="Actions\CounterAdjustment.cs" />
+    <Compile Include="Actions\AdjustZoom.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="metadata\LoupedeckPackage.yaml" />
@@ -64,7 +64,10 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Actions\AdjustZoom0.png" />
+    <EmbeddedResource Include="Actions\AdjustZoom1.png" />
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Actions\SelectPaintbrush0.png" />
     <EmbeddedResource Include="Actions\SelectPaintbrush1.png" />

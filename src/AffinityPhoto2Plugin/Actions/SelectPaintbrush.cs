@@ -9,7 +9,7 @@
         private readonly String _image0ResourcePath;
         private readonly String _image1ResourcePath;
 
-        public SelectPaintbrush() : base(displayName: "Paintbrush", description: "Selects the paint brush.", groupName: "Brushes")
+        public SelectPaintbrush() : base(displayName: "Paintbrush", description: "Selects the paint brush.", groupName: "Tools Panel")
         {
             this._image0ResourcePath = EmbeddedResources.FindFile("SelectPaintbrush0.png");
             this._image1ResourcePath = EmbeddedResources.FindFile("SelectPaintbrush1.png");
