@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Actions\SelectColorPicker.cs" />
+    <Compile Include="Actions\SelectBlemishRemovalTool.cs" />
     <Compile Include="Actions\SelectSelectionTool.cs" />
     <Compile Include="Actions\SelectPaintbrush.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -83,6 +84,12 @@
     <EmbeddedResource Include="Actions\SelectSelectionTool1.png" />
     <EmbeddedResource Include="Actions\SelectSelectionTool2.png" />
     <EmbeddedResource Include="Actions\SelectSelectionTool3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="metadata\Icon16x16.png" />
+    <Content Include="metadata\Icon256x256.png" />
+    <Content Include="metadata\Icon32x32.png" />
+    <Content Include="metadata\Icon48x48.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
