@@ -12,7 +12,7 @@ namespace Loupedeck.AffinityPhoto2Plugin
         private readonly String _image0ResourcePath;
         private readonly String _image1ResourcePath;
 
-        public AdjustBrushSize() : base(displayName: "Brush size", description: "Dial changes the size of the brush, click resets it to the initial value.", groupName: "Tools Panel", hasReset: false)
+        public AdjustBrushSize() : base(displayName: "Brush size", description: "Dial changes the size of the brush, click resets it to the initial value.", groupName: "Tools Panel", hasReset: true)
         {
             this._image0ResourcePath = EmbeddedResources.FindFile("AdjustBrushSize0.png");
             this._image1ResourcePath = EmbeddedResources.FindFile("AdjustBrushSize1.png");
@@ -42,6 +42,7 @@ namespace Loupedeck.AffinityPhoto2Plugin
             }
             this.AdjustmentValueChanged();
         }
+
         protected override BitmapImage GetCommandImage(String actionParameter, PluginImageSize imageSize)
         {
             return !this._toggleState
