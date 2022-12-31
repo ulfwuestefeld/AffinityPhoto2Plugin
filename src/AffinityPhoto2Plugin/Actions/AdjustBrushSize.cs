@@ -48,20 +48,21 @@ namespace Loupedeck.AffinityPhoto2Plugin
                 ? EmbeddedResources.ReadImage(this._image0ResourcePath)
                 : EmbeddedResources.ReadImage(this._image1ResourcePath);
         }
+
         protected override void RunCommand(String actionParameter)
         {
             if (this._counter < 0)
             {
                 for (var i = 0; i > this._counter; i--)
                 {
-                    this.Plugin.ClientApplication.SendKeyboardShortcut(VirtualKeyCode.Oem6);
+                    this.Plugin.ClientApplication.SendKeyboardShortcut(VirtualKeyCode.Oem4);
                 }
             }
             if (this._counter > 0)
             {
                 for (var i = 0; i < this._counter; i++)
                 {
-                    this.Plugin.ClientApplication.SendKeyboardShortcut(VirtualKeyCode.Oem4);
+                    this.Plugin.ClientApplication.SendKeyboardShortcut(VirtualKeyCode.Oem6);
                 }
             }
             this._counter = 0;
