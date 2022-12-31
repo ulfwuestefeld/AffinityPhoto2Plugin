@@ -54,14 +54,14 @@ namespace Loupedeck.AffinityPhoto2Plugin
         {
             if (this._counter < 0)
             {
-                for (var i = 0; i > this._counter; i--)
+                for (var i = 0; i >= this._counter; i--)
                 {
                     this.Plugin.ClientApplication.SendKeyboardShortcut(VirtualKeyCode.Oem4);
                 }
             }
             if (this._counter > 0)
             {
-                for (var i = 0; i < this._counter; i++)
+                for (var i = 0; i <= this._counter; i++)
                 {
                     this.Plugin.ClientApplication.SendKeyboardShortcut(VirtualKeyCode.Oem6);
                 }
