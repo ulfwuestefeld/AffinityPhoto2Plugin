@@ -7,7 +7,7 @@ namespace Loupedeck.AffinityPhoto2Plugin
     public class AffinityPhoto2Plugin : Plugin
     {
         // Gets a value indicating whether this is an Universal plugin or an Application plugin.
-        public override Boolean UsesApplicationApiOnly => true;
+        public override Boolean UsesApplicationApiOnly => false;
 
         // Gets a value indicating whether this is an API-only plugin.
         public override Boolean HasNoApplication => true;
