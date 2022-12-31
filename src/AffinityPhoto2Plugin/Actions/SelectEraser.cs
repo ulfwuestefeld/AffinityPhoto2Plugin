@@ -33,7 +33,7 @@
             }
             this._toggleState = !this._toggleState;*/
             this.Plugin.ClientApplication.SendKeyboardShortcut(VirtualKeyCode.KeyE);
-            this.ActionImageChanged();
+            //this.ActionImageChanged();
         }
     }
 }

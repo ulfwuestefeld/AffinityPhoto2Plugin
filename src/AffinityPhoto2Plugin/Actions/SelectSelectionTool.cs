@@ -60,7 +60,7 @@
             this._toggleState = !this._toggleState;
             //if()
             //_togglecount++;
-            this.ActionImageChanged();
+            //this.ActionImageChanged();
         }
     }
 }

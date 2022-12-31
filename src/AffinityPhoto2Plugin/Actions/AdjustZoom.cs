@@ -23,7 +23,7 @@ namespace Loupedeck.AffinityPhoto2Plugin
             this._counter += diff;
             if (diff < 0)
             {
-                for (Int32 i = 0; i > diff; i--)
+                for (var i = 0; i > diff; i--)
                 {
                     //this.Plugin.ClientApplication.
                     this.Plugin.ClientApplication.SendKeyboardShortcut(VirtualKeyCode.Minus, ModifierKey.Control);
@@ -31,7 +31,7 @@ namespace Loupedeck.AffinityPhoto2Plugin
             }
             if (diff > 0)
             {
-                for (Int32 i = 0; i < diff; i++)
+                for (var i = 0; i < diff; i++)
                 {
                     this.Plugin.ClientApplication.SendKeyboardShortcut(VirtualKeyCode.Add, ModifierKey.Control);
                 }
