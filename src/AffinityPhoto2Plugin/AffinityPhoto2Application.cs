@@ -20,7 +20,7 @@ namespace Loupedeck.AffinityPhoto2Plugin
         // This method can be used to check whether the application is installed or not.
         public override ClientApplicationStatus GetApplicationStatus()
         {
-            // Get-AppxPackage -Name "*AffinityPhoto*"
+            // Powershell command to check if Affinity Photo is installed: Get-AppxPackage -Name "*AffinityPhoto*"
             /*PowerShell ps = PowerShell.Create();
             ps.AddCommand("Get-AppxPackage -Name \"*AffinityPhoto*\"");
             ps.Invoke();*/
