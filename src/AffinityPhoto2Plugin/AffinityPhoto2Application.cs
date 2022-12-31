@@ -1,6 +1,7 @@
 namespace Loupedeck.AffinityPhoto2Plugin
 {
     using System;
+    //using System.Management.Automation;
 
     // This class can be used to connect the Loupedeck plugin to an application.
 
@@ -17,6 +18,13 @@ namespace Loupedeck.AffinityPhoto2Plugin
         protected override String GetBundleName() => "";
 
         // This method can be used to check whether the application is installed or not.
-        public override ClientApplicationStatus GetApplicationStatus() => ClientApplicationStatus.Unknown;
+        public override ClientApplicationStatus GetApplicationStatus()
+        {
+            // Get-AppxPackage -Name "*AffinityPhoto*"
+            /*PowerShell ps = PowerShell.Create();
+            ps.AddCommand("Get-AppxPackage -Name \"*AffinityPhoto*\"");
+            ps.Invoke();*/
+            return ClientApplicationStatus.Unknown;
+        }
     }
 }

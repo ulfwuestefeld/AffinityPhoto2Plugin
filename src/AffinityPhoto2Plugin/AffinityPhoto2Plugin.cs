@@ -1,7 +1,7 @@
 namespace Loupedeck.AffinityPhoto2Plugin
 {
     using System;
-
+    
     // This class contains the plugin-level logic of the Loupedeck plugin.
 
     public class AffinityPhoto2Plugin : Plugin
