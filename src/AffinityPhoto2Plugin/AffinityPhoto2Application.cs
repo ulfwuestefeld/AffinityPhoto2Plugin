@@ -12,7 +12,7 @@ namespace Loupedeck.AffinityPhoto2Plugin
         }
 
         // This method can be used to link the plugin to a Windows application.
-        protected override String GetProcessName() => "Photo.exe";
+        protected override String GetProcessName() => "Photo";
 
         // This method can be used to link the plugin to a macOS application.
         protected override String GetBundleName() => "";
