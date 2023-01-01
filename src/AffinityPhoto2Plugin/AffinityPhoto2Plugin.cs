@@ -10,7 +10,7 @@ namespace Loupedeck.AffinityPhoto2Plugin
         public override Boolean UsesApplicationApiOnly => false;
 
         // Gets a value indicating whether this is an API-only plugin.
-        public override Boolean HasNoApplication => true;
+        public override Boolean HasNoApplication => false;
 
         // This method is called when the plugin is loaded during the Loupedeck service start-up.
         public override void Load()
