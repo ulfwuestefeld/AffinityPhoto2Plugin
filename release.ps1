@@ -10,6 +10,7 @@ $readmemd = "H:\sources\loupedeck\AffinityPhoto2Plugin\README.md"
 (Get-Content $readmemd) -replace "**Plugin Version:** [0-9]+\.[0-9]+\.[0-9]+", ("**Plugin Version:** " + $version) | Set-Content $readmemd
 
 git add $LoupedeckPackageyaml
+git add $readmemd
 git commit -m ("Bump version to " + $version)
 git push origin main
 git tag -a $version -m ("Release version " + $version)
