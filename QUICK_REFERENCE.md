@@ -33,8 +33,8 @@ cp H:\sources\loupedeck\bin\Release\LoupedeckPackage.yaml $pack\metadata\
 
 # 4. Paket erstellen & validieren
 cd H:\sources\loupedeck
-logiplugintool pack "AffinityPhoto2Package" "AffinityPhoto2_0.2.lplug4"
-logiplugintool verify "AffinityPhoto2_0.2.lplug4"
+logiplugintool pack "AffinityPhoto2Package" "AffinityPhoto2.x.lplug4"
+logiplugintool verify "AffinityPhoto2.x.lplug4"
 ```
 
 ## 🧹 Problembehebung

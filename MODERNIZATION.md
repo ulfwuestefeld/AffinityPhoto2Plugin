@@ -103,10 +103,10 @@ dotnet build
 dotnet build -c Release
 
 # Plugin-Paket erstellen
-logiplugintool pack "H:\sources\loupedeck\AffinityPhoto2Package" "AffinityPhoto2_0.1.lplug4"
+logiplugintool pack "H:\sources\loupedeck\AffinityPhoto2Package" "AffinityPhoto2.x.lplug4"
 
 # Paket validieren
-logiplugintool verify "AffinityPhoto2_0.1.lplug4"
+logiplugintool verify "AffinityPhoto2.x.lplug4"
 
 # ✓ Installation möglich durch Doppelklick auf .lplug4 Datei
 ```

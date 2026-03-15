@@ -143,13 +143,13 @@ Operation succeeded in 0,7 seconds.
 ```powershell
 # Doppelklick auf die .lplug4 Datei
 # oder
-Invoke-Item "AffinityPhoto2_0.2.lplug4"
+Invoke-Item "AffinityPhoto2.x.lplug4"
 ```
 
 ### Marketplace Submission
 
 1. Gehe zu: https://marketplace.logi.com/ (als Developer registrieren)
-2. Upload: `AffinityPhoto2_0.2.lplug4`
+2. Upload: `AffinityPhoto2.x.lplug4`
 3. Fülle die Details aus
 4. Stelle sicher, dass alles folgendermaßen dokumentiert ist:
    - ✓ `license` Feld in YAML
