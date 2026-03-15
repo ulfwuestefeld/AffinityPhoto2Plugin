@@ -1,0 +1,86 @@
+name: Release Package
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  create-release:
+    name: Create GitHub Release
+    runs-on: windows-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 8.0
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Build plugin (Release)
+        working-directory: src/AffinityPhoto2Plugin
+        run: dotnet build -c Release
+
+      - name: Install LogiPluginTool
+        run: dotnet tool install --global LogiPluginTool
+
+      - name: Prepare package structure
+        run: |
+          # Remove old package structure
+          if (Test-Path "AffinityPhoto2Package") {
+            Remove-Item -Recurse -Force "AffinityPhoto2Package"
+          }
+          
+          # Create new structure
+          New-Item -ItemType Directory -Path "AffinityPhoto2Package\win" -Force | Out-Null
+          New-Item -ItemType Directory -Path "AffinityPhoto2Package\metadata" -Force | Out-Null
+          
+          # Copy plugin DLL
+          Copy-Item -Path "bin/Release/bin/AffinityPhoto2Plugin.dll" -Destination "AffinityPhoto2Package\win\" -Force
+          
+          # Copy dependencies
+          Get-ChildItem -Path "bin/Release/bin/*.dll" -Exclude "AffinityPhoto2Plugin.dll" | Copy-Item -Destination "AffinityPhoto2Package\win\" -Force
+          
+          # Copy metadata files
+          Copy-Item -Path "src/AffinityPhoto2Plugin/metadata/LoupedeckPackage.yaml" -Destination "AffinityPhoto2Package\metadata\" -Force
+          Copy-Item -Path "src/AffinityPhoto2Plugin/metadata/Icon*.png" -Destination "AffinityPhoto2Package\metadata\" -Force
+
+      - name: Extract version from YAML
+        id: version
+        run: |
+          $yaml = Get-Content "src/AffinityPhoto2Plugin/metadata/LoupedeckPackage.yaml" -Raw
+          if ($yaml -match "version:\s*(.+)") {
+            $version = $matches[1].Trim()
+            echo "VERSION=$version" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
+          }
+
+      - name: Pack plugin
+        run: |
+          $PackageName = "AffinityPhoto2_${{ steps.version.outputs.VERSION }}.lplug4"
+          logiplugintool pack AffinityPhoto2Package $PackageName
+          echo "PACKAGE_NAME=$PackageName" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+
+      - name: Verify plugin package
+        run: logiplugintool verify ${{ env.PACKAGE_NAME }}
+
+      - name: Create Release with artifacts
+        uses: softprops/action-gh-release@v1
+        if: success()
+        with:
+          files: |
+            ${{ env.PACKAGE_NAME }}
+            bin/Release/bin/AffinityPhoto2Plugin.dll
+          draft: false
+          prerelease: false
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload package to artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-${{ steps.version.outputs.VERSION }}
+          path: ${{ env.PACKAGE_NAME }}
+          retention-days: 90
