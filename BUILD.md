@@ -126,7 +126,7 @@ logiplugintool verify "AffinityPhoto2.x.lplug4"
 
 **Erfolgreicher Output:**
 ```
-Verifying plugin package 'H:\sources\loupedeck\AffinityPhoto2_0.2.lplug4'
+Verifying plugin package 'H:\sources\loupedeck\AffinityPhoto2.x.lplug4'
 Unpacking plugin...
 OK
 Verifying plugin package...

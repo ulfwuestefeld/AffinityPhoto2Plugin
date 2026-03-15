@@ -11,14 +11,16 @@ Ein Feature-reiches Loupedeck Plugin für Affinity Photo 2.x, das Schnellzugriff
 ## Installation
 
 ### Automatisch (empfohlen)
-1. Lade das Plugin herunter: [AffinityPhoto2_0.1.lplug4](https://github.com/ulfwuestefeld/AffinityPhoto2Plugin/releases)
+1. Lade das Plugin herunter: [AffinityPhoto2.x.lplug4](https://github.com/ulfwuestefeld/AffinityPhoto2Plugin/releases)
 2. Doppelklick auf die `.lplug4` Datei
 3. Loupedeck wird das Plugin automatisch installieren
 
 ### Manuell
 1. Loupedeck Software öffnen
-2. Menü → "Install Plugin from file" 
-3. Wähle die `.lplug4` Datei
+2. "Plug-Ins ein- und ausblenden"
+3. Einstellungen (Zahnradsymbol)
+4. "+ Plug-In mittels Datei installieren"
+5. AffinityPhoto2.x.lplug4 auswählen
 
 ## Systemanforderungen
 
