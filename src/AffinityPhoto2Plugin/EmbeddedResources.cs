@@ -3,6 +3,7 @@ namespace Loupedeck.AffinityPhoto2Plugin
     using System;
     using System.Collections.Generic;
     using System.Reflection;
+    using Loupedeck;
 
     /// <summary>
     /// Helper class for loading embedded resources from the assembly.

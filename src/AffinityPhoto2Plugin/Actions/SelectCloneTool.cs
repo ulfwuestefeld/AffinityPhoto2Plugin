@@ -1,6 +1,7 @@
 ﻿namespace Loupedeck.AffinityPhoto2Plugin
 {
     using System;
+    using Loupedeck;
 
     public class SelectCloneTool : PluginDynamicCommand
     {

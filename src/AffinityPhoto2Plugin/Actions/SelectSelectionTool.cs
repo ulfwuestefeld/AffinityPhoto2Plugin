@@ -2,6 +2,7 @@
 {
     using System;
     using System.Runtime.CompilerServices;
+    using Loupedeck;
 
     public class SelectSelectionTool : PluginDynamicCommand
     {

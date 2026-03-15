@@ -2,6 +2,7 @@ namespace Loupedeck.AffinityPhoto2Plugin
 {
     using System;
     using System.Runtime.CompilerServices;
+    using Loupedeck;
 
     public class AdjustBrushSize : PluginDynamicAdjustment
     {
