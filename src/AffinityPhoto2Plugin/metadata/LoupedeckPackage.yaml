@@ -15,7 +15,7 @@ displayName: Affinity Photo 2.x
 pluginFileName: AffinityPhoto2Plugin.dll
 
 # Plugin version.
-version: 0.2.2
+version: 0.2.3
 
 # Author of the plugin. The author can be a company or an individual developer.
 author: ulfwuestefeld
