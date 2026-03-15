@@ -26,6 +26,7 @@ jobs:
         run: dotnet build -c Release
 
       - name: Install LogiPluginTool
+        working-directory: src/AffinityPhoto2Plugin
         run: dotnet tool install --global LogiPluginTool
 
       - name: Prepare package structure

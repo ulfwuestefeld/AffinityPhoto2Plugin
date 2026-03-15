@@ -31,6 +31,7 @@ jobs:
         run: dotnet --version
 
       - name: Install LogiPluginTool
+        working-directory: src/AffinityPhoto2Plugin
         run: dotnet tool install --global LogiPluginTool
 
       - name: Restore dependencies
