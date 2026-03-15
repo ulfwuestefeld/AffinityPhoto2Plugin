@@ -1,5 +1,7 @@
 $version = "0.2.3"
 
+$location = Get-Location
+
 Set-Location H:\sources\loupedeck\AffinityPhoto2Plugin\
 
 $LoupedeckPackageyaml = "H:\sources\loupedeck\AffinityPhoto2Plugin\src\AffinityPhoto2Plugin\metadata\LoupedeckPackage.yaml"
@@ -25,3 +27,4 @@ Copy-Item -Path "bin\Release\LoupedeckPackage.yaml" -Destination "AffinityPhoto2
 logiplugintool pack "AffinityPhoto2Package" "AffinityPhoto2.x.lplug4"                          
 logiplugintool verify "AffinityPhoto2.x.lplug4"
 Move-Item .\AffinityPhoto2.x.lplug4 .\AffinityPhoto2Plugin\releases\ -Force
+Set-Location $location
