@@ -86,7 +86,7 @@ Die GitHub Actions Workflows automatisieren den kompletten Build-, Test- und Rel
 ### 3. **release.yml** - Tag-basiertes Release
 
 **Trigger:**
-- Push von Tag `v*` (z.B. `v0.2.1`)
+- Push von Tag `v*` (z.B. `v0.2.2`)
 
 **Schritte:**
 
@@ -139,16 +139,16 @@ git push origin main
 **Schritt 1: Version erhöhen**
 ```yaml
 # src/AffinityPhoto2Plugin/metadata/LoupedeckPackage.yaml
-version: 0.2.1  # Erhöhen
+version: 0.2.2  # Erhöhen
 ```
 
 **Schritt 2: Commit und Tag**
 ```powershell
 git add src/AffinityPhoto2Plugin/metadata/LoupedeckPackage.yaml
-git commit -m "chore: bump version to 0.2.1"
-git tag -a v0.2.1 -m "Release version 0.2.1"
+git commit -m "chore: bump version to 0.2.2"
+git tag -a v0.2.2 -m "Release version 0.2.2"
 git push origin main
-git push origin v0.2.1
+git push origin v0.2.2
 ```
 
 **Schritt 3: GitHub Release wird automatisch erstellt**
@@ -158,8 +158,8 @@ git push origin v0.2.1
 
 **Ergebnis:**
 ```
-GitHub Release v0.2.1
-├── AffinityPhoto2_0.2.1.lplug4  ← Für Benutzer
+GitHub Release v0.2.2
+├── AffinityPhoto2_0.2.2.lplug4  ← Für Benutzer
 ├── AffinityPhoto2Plugin.dll      ← Debug-Info
 └── Release Notes
 ```
@@ -238,10 +238,10 @@ logiplugintool pack AffinityPhoto2Package test.lplug4
 
 ```powershell
 # ✅ Correct:
-git tag -a v0.2.1 -m "Release 0.2.1"
+git tag -a v0.2.2 -m "Release 0.2.2"
 
 # ❌ Wrong (wird nicht erkannt):
-git tag -a 0.2.1 -m "Release 0.2.1"
+git tag -a 0.2.2 -m "Release 0.2.2"
 ```
 
 ### Problem: Artifacts lassen sich nicht herunterladen
@@ -282,8 +282,8 @@ git push origin develop
 
 ### 3. **Release durchführen**
 ```powershell
-git tag -a v0.2.1 -m "Release version 0.2.1"
-git push origin v0.2.1
+git tag -a v0.2.2 -m "Release version 0.2.2"
+git push origin v0.2.2
 
 # ✅ release.yml startet automatisch
 # ✅ GitHub Release wird erstellt

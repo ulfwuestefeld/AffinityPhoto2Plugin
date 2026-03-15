@@ -22,7 +22,7 @@ git push origin develop
 ### Schritt 1: Version erhöhen
 ```yaml
 # Datei: src/AffinityPhoto2Plugin/metadata/LoupedeckPackage.yaml
-version: 0.2.1    # erhöhe von 0.2.0
+version: 0.2.2    # erhöhe von 0.2.0
 ```
 
 ### Schritt 2: Commit und Tag
@@ -31,23 +31,23 @@ cd H:\sources\loupedeck\AffinityPhoto2Plugin
 
 # Änderungen committen
 git add src/AffinityPhoto2Plugin/metadata/LoupedeckPackage.yaml
-git commit -m "chore: bump version to 0.2.1"
+git commit -m "chore: bump version to 0.2.2"
 git push origin main
 
 # Tag erstellen und pushen
-git tag -a v0.2.1 -m "Release version 0.2.1"
-git push origin v0.2.1
+git tag -a v0.2.2 -m "Release version 0.2.2"
+git push origin v0.2.2
 ```
 
 ### Schritt 3: Release abwarten
 - Gehe zu GitHub.com → Repository → **Actions**
-- Suche `release.yml` mit Tag `v0.2.1`
+- Suche `release.yml` mit Tag `v0.2.2`
 - Warte bis alle Schritte grün ✅ sind
 - Klicke auf **Releases** um das Paket zu sehen
 
 ### Ergebnis
-📦 **GitHub Release v0.2.1** ist verfügbar mit:
-- `AffinityPhoto2_0.2.1.lplug4` ← zum Herunterladen
+📦 **GitHub Release v0.2.2** ist verfügbar mit:
+- `AffinityPhoto2_0.2.2.lplug4` ← zum Herunterladen
 - Release Notes (automatisch generiert)
 
 ---
@@ -106,20 +106,20 @@ logiplugintool --version
 # - Sind Pfade korrekt?
 
 # Lokal testen:
-logiplugintool verify AffinityPhoto2_0.2.1.lplug4
+logiplugintool verify AffinityPhoto2_0.2.2.lplug4
 ```
 
 **Problem:** "Tag wurde nicht erkannt"
 ```powershell
 # release.yml braucht Tags im Format v*:
-git tag -a v0.2.1 ...   ✅ Korrekt
-git tag -a 0.2.1 ...    ❌ Falsch
+git tag -a v0.2.2 ...   ✅ Korrekt
+git tag -a 0.2.2 ...    ❌ Falsch
 
 # Falschen Tag löschen und neuen erstellen:
-git tag -d 0.2.1
-git push origin :0.2.1
-git tag -a v0.2.1 -m "..."
-git push origin v0.2.1
+git tag -d 0.2.2
+git push origin :0.2.2
+git tag -a v0.2.2 -m "..."
+git push origin v0.2.2
 ```
 
 ---

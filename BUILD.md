@@ -71,7 +71,7 @@ start loupedeck:plugin/AffinityPhoto2/reload
 Aktualisiere die Version in [metadata/LoupedeckPackage.yaml](src/AffinityPhoto2Plugin/metadata/LoupedeckPackage.yaml):
 
 ```yaml
-version: 0.2.1         # Erhöhe versionsnummer
+version: 0.2.2         # Erhöhe versionsnummer
 ```
 
 ### 2. Release-Build erstellen

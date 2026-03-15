@@ -16,7 +16,7 @@ dotnet build
 ```powershell
 # 1. Version aktualisieren
 # Datei: src/AffinityPhoto2Plugin/metadata/LoupedeckPackage.yaml
-# Feld: version: 0.2.1
+# Feld: version: 0.2.2
 
 # 2. Build & Package
 cd H:\sources\loupedeck\AffinityPhoto2Plugin\src\AffinityPhoto2Plugin
