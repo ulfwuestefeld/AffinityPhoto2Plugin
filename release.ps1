@@ -15,7 +15,8 @@ git commit -m ("Bump version to " + $version)
 git push origin main
 git tag -a $version -m ("Release version " + $version)
 git push origin $version
-dotnet build -c Release
+dotnet restore .\src\AffinityPhoto2Plugin\AffinityPhoto2Plugin.csproj
+dotnet build -c Release .\src\AffinityPhoto2Plugin\AffinityPhoto2Plugin.csproj
 Set-Location H:\sources\loupedeck
 if (Test-Path AffinityPhoto2Package) {
     Remove-Item -Recurse -Force AffinityPhoto2Package
@@ -27,5 +28,11 @@ Copy-Item -Path "bin\Release\Icon*.png" -Destination "AffinityPhoto2Package\meta
 Copy-Item -Path "bin\Release\LoupedeckPackage.yaml" -Destination "AffinityPhoto2Package\metadata\"
 logiplugintool pack "AffinityPhoto2Package" "AffinityPhoto2.x.lplug4"                          
 logiplugintool verify "AffinityPhoto2.x.lplug4"
-Move-Item .\AffinityPhoto2.x.lplug4 .\AffinityPhoto2Plugin\releases\ -Force
+if(Test-Path "H:\sources\loupedeck\AffinityPhoto2Plugin\releases\AffinityPhoto2.x.lplug4") {
+    Remove-Item H:\sources\loupedeck\AffinityPhoto2Plugin\releases\AffinityPhoto2.x.lplug4 -Force
+}
+if(!(Test-Path "H:\sources\loupedeck\AffinityPhoto2Plugin\releases\")) {
+    mkdir H:\sources\loupedeck\AffinityPhoto2Plugin\releases | Out-Null
+}
+Move-Item H:\sources\loupedeck\AffinityPhoto2.x.lplug4 H:\sources\loupedeck\AffinityPhoto2Plugin\releases\AffinityPhoto2.x.lplug4
 Set-Location $location
