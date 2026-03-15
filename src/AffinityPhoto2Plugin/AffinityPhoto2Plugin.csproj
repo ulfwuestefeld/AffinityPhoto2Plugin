@@ -26,8 +26,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Reference Include="PluginApi">
+    <Reference Include="PluginApi" Condition="Exists('$(PluginApiDir)PluginApi.dll')">
       <HintPath>$(PluginApiDir)PluginApi.dll</HintPath>
+      <Private>False</Private>
     </Reference>
   </ItemGroup>
 
