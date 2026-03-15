@@ -23,6 +23,18 @@ author: ulfwuestefeld
 # Copyright information.
 copyright: Copyright © 2022 ulfwuestefeld. All rights reserved.
 
+# License type
+license: MIT
+
+# License URL
+licenseUrl: https://opensource.org/licenses/MIT
+
+# Support page URL
+supportPageUrl: https://github.com/ulfwuestefeld/AffinityPhoto2Plugin/issues
+
+# Home page URL
+homePageUrl: https://github.com/ulfwuestefeld/AffinityPhoto2Plugin
+
 
 # ==================================================================================================
 # PLUGIN PROPERTIES
@@ -47,7 +59,7 @@ supportedDevices:
 # List of plugin capabilities.
 pluginCapabilities:
     # Uncomment the following line if this plugin is an application plugin.
-    #- HasApplication
+    - HasApplication
 
     # Uncomment the following line if the plugin sends keyboard shortcuts to the target application.
     - ActivatesApplication

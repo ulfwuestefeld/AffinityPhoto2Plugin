@@ -1,0 +1,7 @@
+{
+    "dotnet.preferCSharpExtension": true,
+    "chat.tools.terminal.autoApprove": {
+        "logiplugintool": true,
+        "Copy-Item": true
+    }
+}

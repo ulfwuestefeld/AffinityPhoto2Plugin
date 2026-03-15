@@ -328,6 +328,15 @@ __pycache__/
 *.pyc
 
 # Cake - Uncomment if you are using it
+
+# Loupedeck Plugin Build Artifacts
+*.lplug4
+AffinityPhoto2Package/
+TestRefPlugin/
+
+# IDE specific
+.vscode/launch.json
+.idea/
 # tools/**
 # !tools/packages.config
 
