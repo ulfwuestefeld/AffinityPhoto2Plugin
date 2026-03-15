@@ -7,7 +7,7 @@ Set-Location H:\sources\loupedeck\AffinityPhoto2Plugin\
 $LoupedeckPackageyaml = "H:\sources\loupedeck\AffinityPhoto2Plugin\src\AffinityPhoto2Plugin\metadata\LoupedeckPackage.yaml"
 (Get-Content $LoupedeckPackageyaml) -replace "version: [0-9]+\.[0-9]+\.[0-9]+", ("version: " + $version) | Set-Content $LoupedeckPackageyaml
 $readmemd = "H:\sources\loupedeck\AffinityPhoto2Plugin\README.md"
-(Get-Content $readmemd) -replace "**Plugin Version:** [0-9]+\.[0-9]+\.[0-9]+", ("**Plugin Version:** " + $version) | Set-Content $readmemd
+(Get-Content $readmemd) -replace "\*\*Plugin Version:\*\* [0-9]+\.[0-9]+\.[0-9]+", ("**Plugin Version:** " + $version) | Set-Content $readmemd
 
 git add $LoupedeckPackageyaml
 git add $readmemd
