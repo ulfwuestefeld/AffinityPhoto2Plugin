@@ -69,6 +69,6 @@ Contributions sind willkommen! Bitte öffne einen Issue oder Pull Request auf Gi
 
 ---
 
-**Plugin Version:** 0.2  
+**Plugin Version:** 0.2.1  
 **Loupedeck SDK:** .NET 8.0  
 **Status:** ✅ Funktionsfähig (März 2026)

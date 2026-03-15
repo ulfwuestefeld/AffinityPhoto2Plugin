@@ -9,13 +9,15 @@ jobs:
   create-release:
     name: Create GitHub Release
     runs-on: windows-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4.1.7
 
       - name: Setup .NET 8.0
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v4.0.1
         with:
           dotnet-version: '8.0.x'
 
