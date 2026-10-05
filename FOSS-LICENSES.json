@@ -1,0 +1,101 @@
+{
+  "schemaVersion": 1,
+  "components": [
+    {
+      "fileName": "AffinityPhoto2Plugin.dll",
+      "name": "Affinity Photo 2 Loupedeck Plugin",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/ulfwuestefeld/AffinityPhoto2Plugin"
+    },
+    {
+      "fileName": "ExCSS.dll",
+      "name": "ExCSS",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/TylerBrinks/ExCSS",
+      "minimumAssemblyVersion": "4.2.3.0",
+      "required": true
+    },
+    {
+      "fileName": "LogiEventTracing.dll",
+      "name": "Logi Plugin Service Event Tracing",
+      "license": null,
+      "licenseStatus": "Vendor component; not FOSS. Refer to the Logitech host software terms.",
+      "sourceUrl": "https://github.com/Logitech/actions-sdk",
+      "minimumAssemblyVersion": "6.4.2.3414",
+      "required": true
+    },
+    {
+      "fileName": "Newtonsoft.Json.dll",
+      "name": "Json.NET",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/JamesNK/Newtonsoft.Json",
+      "minimumAssemblyVersion": "13.0.0.0",
+      "required": true
+    },
+    {
+      "fileName": "PluginApi.dll",
+      "name": "Logi Plugin Service Plugin API",
+      "license": null,
+      "licenseStatus": "Vendor component; not FOSS. Refer to the Logitech host software terms.",
+      "sourceUrl": "https://github.com/Logitech/actions-sdk",
+      "minimumAssemblyVersion": "6.4.2.3414",
+      "required": true
+    },
+    {
+      "fileName": "ShimSkiaSharp.dll",
+      "name": "ShimSkiaSharp",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/wieslawsoltes/Svg.Skia",
+      "minimumAssemblyVersion": "2.0.0.0",
+      "required": true
+    },
+    {
+      "fileName": "SkiaSharp.dll",
+      "name": "SkiaSharp",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/mono/SkiaSharp",
+      "minimumAssemblyVersion": "2.88.0.0",
+      "required": true
+    },
+    {
+      "fileName": "Svg.Custom.dll",
+      "name": "Svg.Custom",
+      "license": "MS-PL",
+      "sourceUrl": "https://github.com/wieslawsoltes/Svg.Skia",
+      "minimumAssemblyVersion": "2.0.0.0",
+      "required": true
+    },
+    {
+      "fileName": "Svg.Model.dll",
+      "name": "Svg.Model",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/wieslawsoltes/Svg.Skia",
+      "minimumAssemblyVersion": "2.0.0.0",
+      "required": true
+    },
+    {
+      "fileName": "Svg.Skia.dll",
+      "name": "Svg.Skia",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/wieslawsoltes/Svg.Skia",
+      "minimumAssemblyVersion": "2.0.0.0",
+      "required": true
+    },
+    {
+      "fileName": "websocket-sharp.dll",
+      "name": "websocket-sharp",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/sta/websocket-sharp",
+      "minimumAssemblyVersion": "6.4.2.3414",
+      "required": true
+    },
+    {
+      "fileName": "YamlDotNet.dll",
+      "name": "YamlDotNet",
+      "license": "MIT",
+      "sourceUrl": "https://github.com/aaubry/YamlDotNet",
+      "minimumAssemblyVersion": "16.0.0.0",
+      "required": true
+    }
+  ]
+}

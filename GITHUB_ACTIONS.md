@@ -21,27 +21,28 @@ Die GitHub Actions Workflows automatisieren den kompletten Build-, Test- und Rel
 **Trigger:**
 - Auf Pushes zu `main` oder `develop`
 - Auf Pull Requests gegen `main`
-- Nur wenn Dateien in `src/` geändert wurden
+- Wenn Dateien in `src/`, `build/`, dem FOSS-Inventar, den Notices oder den Workflows geändert wurden
 
 **Schritte:**
 
 ```
 ✅ Code auschecken
    ↓
-✅ .NET 8.0 setup
+✅ .NET 10 setup
    ↓
 ✅ Dependencies restoren
    ↓
-✅ Debug-Build (dotnet build -c Debug)
+✅ Debug- und Release-Build (nur mit installiertem Logi Plugin Service SDK)
    ↓
-✅ Release-Build (dotnet build -c Release)
+✅ Paketierung mit Notices und SBOM auf `main` (nur mit SDK)
    ↓
 ✅ Artifacts hochladen (Debug: 5 Tage, Release: 30 Tage)
 ```
 
 **Ergebnis:**
 - Artifacts: `debug-build` und `release-build`
-- Enthält: DLLs, Dependencies, Metadaten-Dateien
+- Enthält: DLLs und Metadaten-Dateien; Paketierung erzeugt zusätzlich THIRD-PARTY-NOTICES und CycloneDX-SBOM
+- Ohne `PluginApi.dll` überspringt die Pipeline Build und Paketierung
 
 ---
 
@@ -51,35 +52,19 @@ Die GitHub Actions Workflows automatisieren den kompletten Build-, Test- und Rel
 
 **Schritte:**
 
-**Job 1: Code-Analyse**
+**Validierung**
 ```
 ✅ Code auschecken
    ↓
-✅ .NET 8.0 Setup
+✅ FOSS-Lizenzinventar validieren
    ↓
-✅ Format-Check (dotnet format --verify-no-changes)
+✅ .NET 10 Setup
    ↓
-✅ Build mit Code-Style-Enforcement
-```
-
-**Job 2: Package-Verifikation (Trockentest)**
-```
-✅ Release-Build
-   ↓
-✅ LogiPluginTool installieren
-   ↓
-✅ Package-Struktur vorbereiten
-   ↓
-✅ Plugin packen (logiplugintool pack)
-   ↓
-✅ Paket verifizieren (logiplugintool verify)
-   ↓
-✅ Package-Integrität prüfen
+✅ Build, SBOM-Erzeugung und Paket-Verifikation (wenn das Logi SDK verfügbar ist)
 ```
 
 **Ergebnis:**
-- Stellt sicher, dass Paket immer gültig ist
-- Frühe Erkennung von Package-Problemen
+- Lizenzinventar wird immer geprüft; SDK-abhängige Paketprüfungen laufen nur mit installiertem Logi SDK
 
 ---
 
@@ -87,6 +72,7 @@ Die GitHub Actions Workflows automatisieren den kompletten Build-, Test- und Rel
 
 **Trigger:**
 - Push von Tag `v*` (z.B. `v0.2.2`)
+- Benötigt einen Windows-Runner mit installiertem Logi Plugin Service SDK
 
 **Schritte:**
 
@@ -97,7 +83,7 @@ Die GitHub Actions Workflows automatisieren den kompletten Build-, Test- und Rel
    ↓
 ✅ LogiPluginTool installieren
    ↓
-✅ Package-Struktur vorbereiten
+✅ FOSS-Notices und SBOM erzeugen
    ↓
 ✅ Version aus LoupedeckPackage.yaml extrahieren
    ↓
@@ -107,14 +93,14 @@ Die GitHub Actions Workflows automatisieren den kompletten Build-, Test- und Rel
    ↓
 ✅ GitHub Release erstellen mit:
    - *.lplug4 Paket
-   - AffinityPhoto2Plugin.dll
+   - CycloneDX-SBOM und THIRD-PARTY-NOTICES
    - Auto-generierte Release Notes
    ↓
 ✅ Paket als Artifact (90 Tage) speichern
 ```
 
 **Ergebnis:**
-- GitHub Release mit Binaries
+- GitHub Release mit Plugin-Paket, SBOM und Lizenzhinweisen
 - Downloadbar für Benutzer
 - .lplug4 fertig zum Installieren
 
@@ -160,7 +146,8 @@ git push origin v0.2.2
 ```
 GitHub Release v0.2.2
 ├── AffinityPhoto2_0.2.2.lplug4  ← Für Benutzer
-├── AffinityPhoto2Plugin.dll      ← Debug-Info
+├── AffinityPhoto2_0.5.0.cdx.json
+├── AffinityPhoto2_0.5.0.THIRD-PARTY-NOTICES.md
 └── Release Notes
 ```
 
@@ -227,9 +214,14 @@ retention-days: 90  # z.B. 30 für kürzere Aufbewahrung
 # Prüfen in workflow logs:
 # "Install LogiPluginTool" Schritt ausgeben lesen
 
-# Lokal testen:
-dotnet tool install --global LogiPluginTool
-logiplugintool pack AffinityPhoto2Package test.lplug4
+# Lokale Paketierung (nach erfolgreichem Build mit installiertem Logi SDK):
+$repo = (Get-Location).Path
+$stage = Join-Path $env:TEMP ("AffinityPhoto2Package-" + [guid]::NewGuid().ToString('N'))
+$package = Join-Path $env:TEMP 'AffinityPhoto2-test.lplug4'
+& (Join-Path $repo 'build\Package-Plugin.ps1') `
+  -BuildOutputPath (Join-Path $env:TEMP 'AffinityPhoto2Release\bin') `
+  -PackageRoot $stage `
+  -PackageOutputPath $package
 ```
 
 ### Problem: Release.yml wird nicht ausgelöst
@@ -310,6 +302,6 @@ git push origin v0.2.2
 ## 📚 Weitere Ressourcen
 
 - **BUILD.md** - Detaillierte lokale Build-Anleitung
-- **MODERNIZATION.md** - Migration zu .NET 8.0
+- **MODERNIZATION.md** - Aktualisierung auf .NET 10.0
 - [GitHub Actions Documentation](https://docs.github.com/en/actions)
 - [LogiPluginTool Dokumentation](https://github.com/Loupedeck/SDK)

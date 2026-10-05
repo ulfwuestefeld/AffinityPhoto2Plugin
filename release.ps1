@@ -1,4 +1,4 @@
-$version = "0.2.3"
+$version = "0.5.0"
 
 $location = Get-Location
 

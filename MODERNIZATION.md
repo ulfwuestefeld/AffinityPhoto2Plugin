@@ -1,4 +1,4 @@
-# Affinity Photo 2 Plugin - Modernisierung zu .NET 8.0
+# Affinity Photo 2 Plugin - Aktualisierung der Plugin-Architektur
 
 ## Problemstellung (März 2026)
 
@@ -6,7 +6,8 @@ Das Loupedeck Plugin "AffinityPhoto2" konnte **nicht installiert werden**. Die U
 
 ### 1. **Veraltete .NET Framework Version** (KRITISCH)
 - **Vorher:** .NET Framework 4.7.2 (veraltet, 2015)
-- **Nachher:** .NET 8.0 (aktuell, LTS)
+- **Zwischenstand:** .NET 8.0
+- **Aktuelles Ziel:** .NET 10.0, passend zur installierten Plugin API
 - **Impact:** Plugin wurde von modernder Loupedeck SDK nicht erkannt
 
 ### 2. **Falsches Projektformat**
@@ -46,7 +47,7 @@ Das Loupedeck Plugin "AffinityPhoto2" konnte **nicht installiert werden**. Die U
 
 <!-- NACHHER: Modernes SDK-style Format -->
 <Project Sdk="Microsoft.NET.Sdk">
-  <TargetFramework>net8.0</TargetFramework>
+  <TargetFramework>net10.0</TargetFramework>
   <Reference Include="PluginApi">
     <HintPath>$(PluginApiDir)PluginApi.dll</HintPath>
   </Reference>
@@ -92,21 +93,15 @@ Entfernte doppelte Assembly-Attribute, die vom SDK automatisch generiert werden:
 cd src\AffinityPhoto2Plugin
 dotnet build
 
-# Output: H:\sources\loupedeck\bin\Debug\bin\AffinityPhoto2Plugin.dll
+# Output: <Repository>\bin\Debug\bin\AffinityPhoto2Plugin.dll
 # Plugin wird automatisch vom Loupedeck Service geladen
 ```
 
 ### Release und Distribution
 
 ```powershell
-# Release-Build
-dotnet build -c Release
-
-# Plugin-Paket erstellen
-logiplugintool pack "H:\sources\loupedeck\AffinityPhoto2Package" "AffinityPhoto2.x.lplug4"
-
-# Paket validieren
-logiplugintool verify "AffinityPhoto2.x.lplug4"
+# Release-Paket inklusive FOSS-Notices und CycloneDX-SBOM erstellen
+# Vollständiger Ablauf und Befehle: BUILD.md
 
 # ✓ Installation möglich durch Doppelklick auf .lplug4 Datei
 ```
@@ -149,11 +144,12 @@ Das Projekt benötigt folgende Tools:
 
 | Tool | Version | Quelle |
 |------|---------|--------|
-| .NET SDK | 8.0+ | https://dotnet.microsoft.com/download/dotnet/8.0 |
-| LogiPluginTool | Latest | `dotnet tool install --global LogiPluginTool` |
+| .NET SDK | 10.0+ | https://dotnet.microsoft.com/download/dotnet/10.0 |
+| Logi Plugin Service API | 6.4.2.3414+ | Lokale Logi Plugin Service Installation |
+| LogiPluginTool | 6.1.4.22672 | `dotnet tool install --global LogiPluginTool --version 6.1.4.22672` |
 | Loupedeck Software | Latest | https://loupedeck.com/downloads/ |
 
-Die PluginApi.dll wird von der Loupedeck-Installation bereitgestellt (nicht NuGet).
+`PluginApi.dll` wird von der Logi Plugin Service Installation bereitgestellt (nicht NuGet). Die aktuelle lokale API referenziert `System.Runtime` 10.0, daher kann das Plugin nicht mehr gegen .NET 8 gebaut werden.
 
 ---
 
@@ -182,13 +178,13 @@ AffinityPhoto2Package/
 
 ---
 
-## Zukünftige Verbesserungen
+## Verbleibende Verbesserungen
 
 1. **Unit Tests:** Hinzufügen von Unit-Tests für Plugin-Logik
-2. **GitHub Actions:** CI/CD Pipeline für automatische Release-Builds
-3. **Lokalisierung:** XLIFF-Support für mehrsprachige UI
-4. **Icon Templates:** Custom `.ict` Templates für Action-Icons
-5. **Hot Reload:** `dotnet watch build` Support für schnellere Entwicklung
+2. **Release-Runner:** Self-hosted Windows-Runner mit installiertem Logi Plugin Service SDK für automatische GitHub-Releases bereitstellen
+3. **Runtime-Tests:** Plugin in Logi Plugin Service und Affinity Photo 2 testen
+4. **Lokalisierung:** XLIFF-Support für mehrsprachige UI
+5. **Icon Templates:** Custom `.ict` Templates für Action-Icons
 
 ---
 

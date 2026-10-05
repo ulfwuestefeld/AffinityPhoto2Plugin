@@ -5,15 +5,15 @@
 Stelle sicher, dass folgende Tools installiert sind:
 
 ```powershell
-# .NET 8.0 SDK prüfen
+# .NET 10 SDK prüfen
 dotnet --version
-# Sollte mindestens 8.0.x anzeigen
+# Sollte mindestens 10.0.x anzeigen
 
 # Loupedeck Software
 # https://loupedeck.com/downloads/
 
-# LogiPluginTool installieren (wenn nicht vorhanden)
-dotnet tool install --global LogiPluginTool
+# Aktuelle, reproduzierbare LogiPluginTool-Version installieren
+dotnet tool install --global LogiPluginTool --version 6.1.4.22672
 ```
 
 ---
@@ -33,7 +33,7 @@ dotnet watch build
 ```
 
 **Was passiert beim Build:**
-- `.NET 8.0` kompiliert den Code
+- `.NET 10` kompiliert den Code
 - Abhängigkeiten (PluginApi.dll etc.) werden kopiert
 - Metadaten-Dateien (Icons, YAML) werden kopiert
 - Automatisch ein `.link` File für Loupedeck erstellt
@@ -41,8 +41,8 @@ dotnet watch build
 
 **Output:**
 ```
-H:\sources\loupedeck\bin\Debug\bin\AffinityPhoto2Plugin.dll
-H:\sources\loupedeck\bin\Debug\bin\metadata\
+<Repository>\bin\Debug\bin\AffinityPhoto2Plugin.dll
+<Repository>\bin\Debug\metadata\
 ```
 
 ### 2. Testing im Loupedeck
@@ -64,7 +64,7 @@ start loupedeck:plugin/AffinityPhoto2/reload
 
 ---
 
-## Release-Build
+## Release-Build und SBOM
 
 ### 1. Vorbereitung
 
@@ -79,54 +79,29 @@ version: 0.2.2         # Erhöhe versionsnummer
 ```powershell
 cd H:\sources\loupedeck\AffinityPhoto2Plugin\src\AffinityPhoto2Plugin
 
-# Release-Build
-dotnet build -c Release
+# Isolierter Output verhindert, dass alte DLLs aus früheren Builds
+# versehentlich im Paket verbleiben. Reload ist beim Release-Build aus.
+$releaseRoot = Join-Path $env:TEMP ("AffinityPhoto2Plugin-Release-" + [guid]::NewGuid().ToString('N'))
+$releaseBin = Join-Path $releaseRoot "bin"
+dotnet build -c Release `
+  -p:OutputPath="$releaseBin\" `
+  -p:EnablePluginReload=false
 
-# Output:
-# H:\sources\loupedeck\bin\Release\bin\AffinityPhoto2Plugin.dll
-```
+if ($LASTEXITCODE -ne 0) { throw "Release build failed." }
 
-### 3. Plugin-Paket vorbereiten
-
-```powershell
-cd H:\sources\loupedeck
-
-# Backup der alten Paket-Struktur
-if (Test-Path AffinityPhoto2Package) {
-    Remove-Item -Recurse -Force AffinityPhoto2Package
-}
-
-# Neue Verzeichnisstruktur
-mkdir AffinityPhoto2Package\win | Out-Null
-mkdir AffinityPhoto2Package\metadata | Out-Null
-
-# Release-Dateien kopieren
-Copy-Item -Path "bin\Release\bin\*" `
-          -Destination "AffinityPhoto2Package\win\" `
-          -Exclude "metadata" `
-          -Recurse -Force
-
-# Metadaten kopieren
-Copy-Item -Path "bin\Release\Icon*.png" `
-          -Destination "AffinityPhoto2Package\metadata\"
-Copy-Item -Path "bin\Release\LoupedeckPackage.yaml" `
-          -Destination "AffinityPhoto2Package\metadata\"
-```
-
-### 4. Paket erstellen und validieren
-
-```powershell
-# .lplug4 Paket erstellen
-logiplugintool pack "AffinityPhoto2Package" "AffinityPhoto2.x.lplug4"
-
-# Paket validieren
-logiplugintool verify "AffinityPhoto2.x.lplug4"
-# Sollte "OK" zurückgeben
+# Paket, FOSS-Notices und CycloneDX-SBOM erstellen und Paket verifizieren.
+$version = "0.5.0"
+$packageStage = Join-Path $env:TEMP ("AffinityPhoto2Package-" + [guid]::NewGuid().ToString('N'))
+$packageFile = Join-Path (Get-Location) "AffinityPhoto2_$version.lplug4"
+pwsh ..\..\build\Package-Plugin.ps1 `
+  -BuildOutputPath $releaseBin `
+  -PackageRoot $packageStage `
+  -PackageOutputPath $packageFile
 ```
 
 **Erfolgreicher Output:**
 ```
-Verifying plugin package 'H:\sources\loupedeck\AffinityPhoto2.x.lplug4'
+Verifying plugin package 'H:\sources\loupedeck\AffinityPhoto2Plugin\AffinityPhoto2_0.5.0.lplug4'
 Unpacking plugin...
 OK
 Verifying plugin package...
@@ -157,7 +132,8 @@ Invoke-Item "AffinityPhoto2.x.lplug4"
    - ✓ `supportPageUrl` Feld in YAML
    - ✓ `homePageUrl` Feld in YAML
    - ✓ Icon (metadata/Icon256x256.png)
-   - ✓ Alle Abhängigkeiten im Paket
+   - ✓ Alle Abhängigkeiten und FOSS-Notices im Paket
+   - ✓ `metadata/sbom.cdx.json` (CycloneDX 1.6) und SBOM-Sidecar
 
 ---
 
@@ -280,4 +256,4 @@ Verwendung:
 
 ---
 
-**Letzte Aktualisierung:** 15. März 2026
+**Letzte Aktualisierung:** 5. Oktober 2026

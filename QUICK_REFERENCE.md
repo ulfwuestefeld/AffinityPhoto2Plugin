@@ -16,25 +16,19 @@ dotnet build
 ```powershell
 # 1. Version aktualisieren
 # Datei: src/AffinityPhoto2Plugin/metadata/LoupedeckPackage.yaml
-# Feld: version: 0.2.2
+# Feld: version: 0.5.0 (oder nächste Release-Version)
 
-# 2. Build & Package
+# 2. Isolierter .NET 10 Release-Build und Package
 cd H:\sources\loupedeck\AffinityPhoto2Plugin\src\AffinityPhoto2Plugin
-dotnet build -c Release
+$releaseRoot = Join-Path $env:TEMP ("AffinityPhoto2-" + [guid]::NewGuid().ToString('N'))
+$releaseBin = Join-Path $releaseRoot "Release\bin"
+dotnet build .\AffinityPhoto2Plugin.csproj -c Release "-p:OutputPath=$releaseBin\" -p:EnablePluginReload=false
+if ($LASTEXITCODE -ne 0) { throw "Release build failed." }
 
-# 3. Verzeichnis vorbereiten
-$pack = "H:\sources\loupedeck\AffinityPhoto2Package"
-Remove-Item -Recurse -Force $pack -ErrorAction SilentlyContinue
-mkdir $pack\win | Out-Null
-mkdir $pack\metadata | Out-Null
-cp H:\sources\loupedeck\bin\Release\bin\* $pack\win\ -Recurse -Exclude metadata
-cp H:\sources\loupedeck\bin\Release\Icon*.png $pack\metadata\
-cp H:\sources\loupedeck\bin\Release\LoupedeckPackage.yaml $pack\metadata\
-
-# 4. Paket erstellen & validieren
-cd H:\sources\loupedeck
-logiplugintool pack "AffinityPhoto2Package" "AffinityPhoto2.x.lplug4"
-logiplugintool verify "AffinityPhoto2.x.lplug4"
+$repo = (Resolve-Path ..\..).Path
+$stage = Join-Path $env:TEMP ("AffinityPhoto2Package-" + [guid]::NewGuid().ToString('N'))
+$package = Join-Path $repo "AffinityPhoto2_0.5.0.lplug4"
+& (Join-Path $repo "build\Package-Plugin.ps1") -BuildOutputPath $releaseBin -PackageRoot $stage -PackageOutputPath $package
 ```
 
 ## 🧹 Problembehebung
@@ -57,7 +51,7 @@ logiplugintool verify "AffinityPhoto2.x.lplug4"
 
 | Datei | Zweck |
 |-------|-------|
-| `AffinityPhoto2Plugin.csproj` | Projekt-Konfiguration (.NET 8.0) |
+| `AffinityPhoto2Plugin.csproj` | Projekt-Konfiguration (.NET 10.0) |
 | `LoupedeckPackage.yaml` | Plugin-Metadaten (Name, Version, Icons) |
 | `AffinityPhoto2Plugin.cs` | Hauptplugin-Klasse |
 | `AffinityPhoto2Application.cs` | App-Binding-Logik |
@@ -66,7 +60,7 @@ logiplugintool verify "AffinityPhoto2.x.lplug4"
 
 ## 🎯 Technische Details
 
-- **Framework:** .NET 8.0 (nicht NuGet!)
+- **Framework:** .NET 10.0 (Plugin API lokal aus dem Logi Plugin Service)
 - **PluginApi:** Von Loupedeck-Installation (`C:\Program Files\Logi\LogiPluginService\`)
 - **Output:** `.lplug4` Paket (zip mit Struktur)
 - **Supported Devices:** LoupedeckCtFamily (CT, Live, Live S, Razer Stream Controller)
@@ -75,13 +69,11 @@ logiplugintool verify "AffinityPhoto2.x.lplug4"
 
 - [ ] Code-Änderungen durchführen
 - [ ] `LoupedeckPackage.yaml` Version erhöhen
-- [ ] `dotnet build -c Release` ausführen
-- [ ] Plugin-Verzeichnis korrekt strukturieren
-- [ ] `logiplugintool pack` ausführen
-- [ ] `logiplugintool verify` bestätigt OK
+- [ ] Isolierten .NET 10 Release-Build ausführen
+- [ ] `build/Package-Plugin.ps1` für Notices, CycloneDX-SBOM und Paket-Verifikation ausführen
 - [ ] Manuell in Loupedeck testen (Doppelklick auf .lplug4)
 - [ ] GitHub Release erstellen (wenn öffentlich)
 
 ---
 
-**Stand:** März 2026 | **Status:** ✅ Funktionsfähig | **Kontakt:** GitHub Issues
+**Stand:** März 2026 | **Status:** ✅ Build und Paket verifiziert; Runtime nicht getestet | **Kontakt:** GitHub Issues

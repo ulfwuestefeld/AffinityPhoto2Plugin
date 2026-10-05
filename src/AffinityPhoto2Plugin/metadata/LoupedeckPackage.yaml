@@ -63,23 +63,3 @@ pluginCapabilities:
 
     # Uncomment the following line if the plugin sends keyboard shortcuts to the target application.
     - ActivatesApplication
-
-
-# ==================================================================================================
-# LOUPEDECK MARKETPLACE SETTINGS
-# ==================================================================================================
-
-# Name of the license that the plugin is licensed under. Select the one that you prefer.
-# NOTE: GPL license is not compatible with Loupedeck Marketplace.
-license: MIT
-
-# URL of the plugin license.
-licenseUrl: https://opensource.org/licenses/MIT
-
-# URL of the support page where the users can send improvement suggestions and report bugs.
-# The URL is shown in Loupedeck Marketplace. The page can be for example a GitHub issues page.
-# NOTE: This setting is recommended when publishing the plugin in Loupedeck Marketplace.
-#supportPageUrl: https://github.com/ulfwuestefeld/AffinityPhoto2Plugin/issues
-
-# URL of the plugin homepage. The URL is shown in Loupedeck Marketplace.
-#homePageUrl: https://github.com/ulfwuestefeld/AffinityPhoto2Plugin
